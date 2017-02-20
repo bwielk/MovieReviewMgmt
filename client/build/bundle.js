@@ -63,14 +63,14 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Films = __webpack_require__(2);
+var Films = __webpack_require__(1);
 
 var UI = function(){
   var films = new Films();
@@ -101,7 +101,7 @@ UI.prototype = {
     for(var film of films) {
       var li = document.createElement("li");
       this.appendText(li, film.title, "Film: ");
-      
+      this.appendText(li, film.genre, "Genre: ");
       for(var review of film.reviews){
         this.createReview(li, review);
       }
@@ -114,29 +114,10 @@ module.exports = UI;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
-
-var Film = function(options){
-  this.title = options.title;
-  this.actors = options.actors;
-  this.reviews = options.reviews || [];
-}
-
-Film.prototype = {
-  addReview: function(review){
-    this.reviews.push(review);
-  }
-}
-
-module.exports = Film;
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Film = __webpack_require__(1);
-var Review = __webpack_require__(3);
+var Film = __webpack_require__(3);
+var Review = __webpack_require__(4);
 
 var Films = function(){
 
@@ -152,38 +133,41 @@ var Films = function(){
     author: "Val"
   });
 
+  var review3 = new Review({
+    comment: "Quite alright...",
+    rating: 60,
+    author: "Blaise"
+  });
+
   var film1 = new Film({
     title: "Now You See Me",
-    actors: ["Woody Harrelson", "Jesse Eisenberg"]
+    actors: ["Woody Harrelson", "Jesse Eisenberg"],
+    genre: "Criminal"
   });
 
   var film2 = new Film({
     title: "Star Wars Episode IV: A New Hope",
-    actors: ["Harrison Ford", "Alec Guiness"]
+    actors: ["Harrison Ford", "Alec Guiness"],
+    genre: "Science fiction"
   });
+
+  var film3 = new Film({
+    title: "The Hangover",
+    actors: ["Farrison Hord", "Glec Auiness"],
+    genre: "Comedy"
+  })
 
   film1.addReview(review1);
   film2.addReview(review2);
+  film3.addReview(review3);
 
-  return [film1, film2];
+  return [film1, film2, film3];
 }
 
 module.exports = Films;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-var Review = function(options){
-  this.comment = options.comment;
-  this.rating = options.rating;
-  this.author = options.author;
-}
-
-module.exports = Review;
-
-/***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var UI = __webpack_require__(0);
@@ -194,6 +178,38 @@ var app = function(){
 
 window.onload = app;
 
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var Film = function(options){
+  this.title = options.title;
+  this.actors = options.actors;
+  this.reviews = options.reviews || [];
+  this.genre = options.genre;
+}
+
+Film.prototype = {
+  addReview: function(review){
+    this.reviews.push(review);
+  }
+}
+
+module.exports = Film;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var Review = function(options){
+  this.comment = options.comment;
+  this.rating = options.rating;
+  this.author = options.author;
+}
+
+module.exports = Review;
 
 /***/ })
 /******/ ]);
