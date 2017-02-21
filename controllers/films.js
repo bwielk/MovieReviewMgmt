@@ -1,7 +1,8 @@
 var express = require('express');
 var filmsRouter = express.Router();
-
-var films = ["Trainspotting", "La Dolce Vita", "Birds", "The Hours", "Amelie"];
+var films = require('../client/src/models/films')(); //self-invoking
+var Film = require('../client/src/models/film');
+var Review = require('../client/src/models/review');
 
 filmsRouter.get('/', function(req, res){
   res.json(films);
